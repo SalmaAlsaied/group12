@@ -145,23 +145,13 @@
 
 //    echo $message;
 
+// $age = 12;
 
-$status = 50; 
-
-  //    ()      {    }
-  if($status == 3){
-    echo "test Message";
-  }elseif($status ==  4){
-      echo "Status = 4";
-  }elseif($status ==  5){
-    echo "Status = 5";
-}
-  else{
-      echo "Status != 3 && 4 && 5 ";
-  }
-
-
-
+// if($age == 12){
+//    echo '12';
+// }else if($age == 13){
+// echo 'todo';
+// }
 
 
 
