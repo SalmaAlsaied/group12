@@ -145,30 +145,89 @@
 // Echo $_SERVER['REQUEST_METHOD'];
 
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+// if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-    $name  = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+//     $name  = $_POST['name'];
+//     $email = $_POST['email'];
+//     $password = $_POST['password'];
  
  
-    echo $name.' : '.$email.' : '.$password;  
-    }
+//     echo $name.' : '.$email.' : '.$password;  
+//     }
+
+
+
+
+//   //   root@yahoo.com      // 
+
+
+
+############################################################################################# 
+// Filters 
  
 
+
+// filter_var($input,filter);
+
+//    $email = "testyahoo.com"; 
+
+//    var_dump(filter_var($email,FILTER_VALIDATE_EMAIL));
+
+
+//   $age = "20t"; 
+
+//       var_dump(filter_var($age,FILTER_VALIDATE_INT));
+
+    // $url = "//localhost/group12/session3.php";
+
+    // var_dump(filter_var($url,FILTER_VALIDATE_URL));
+
+    // $ip = "127.0.0"; 
+
+    // var_dump(filter_var($ip,FILTER_VALIDATE_IP));
+
+
+    //   $price= "3tets"; 
+      
+    //   var_dump(filter_var($price,FILTER_VALIDATE_FLOAT));
+
+      // FILTER_VALIDATE_BOOLEAN 
+
+      // https://github.com/MrWeber94/HRApp/blob/main/.gitignore     == https://github.com 
+
+
+
+
+    //   $age = "1***************2_____3test"; 
+    //  ECHO  filter_var($age,FILTER_SANITIZE_NUMBER_INT);
+
+    // $email = "root(FCIH)@yahoo.com"; 
+
+    // // var_dump(filter_var($email,FILTER_VALIDATE_EMAIL));
+
+    //  echo filter_var($email,FILTER_SANITIZE_EMAIL); // rootFCIH@yahoo.com
+
+    //   $url = "https://www.w3schoo��ls.co�m";   https://www.google.com/   https://github.com/
+
+//   //  var_dump(filter_var($url,FILTER_VALIDATE_URL));
+
+//      ECHO  filter_var($url,FILTER_SANITIZE_URL);
+
+
+ 
+    //   $name = '<h1>ROOT</h1>';
+
+    // //   echo $name;
+
+    // //  ECHO   filter_var($name,FILTER_SANITIZE_STRING);
+
+    // echo strip_tags($name);
 
 
 ?>
 
 
-
-
-
-
-
-
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -185,7 +244,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <div class="container">
         <h2>Register</h2>
 
-        <form action="<?php echo  $_SERVER['PHP_SELF']; ?>" method="post">
+        <form action="<?php //echo  $_SERVER['PHP_SELF']; ?>" method="post">
 
             <div class="form-group">
                 <label for="exampleInputName">Name</label>
@@ -206,4 +265,4 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
+    </div> -->

@@ -307,6 +307,7 @@ You can use conditional statements.
 // echo rand(1,10);
 
 
+// $url = "https://www.w3schoo��ls.co�m";
 
 
 ?>
