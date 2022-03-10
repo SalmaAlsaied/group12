@@ -15,3 +15,12 @@
 
 
 
+/*
+
+  form    [title , content ]    
+  1- validate  inputs   [title >>> required | >= 10 chars ] , [content => required length >= 30 ]    action php_self .... 
+  2 - create blog.php file  read articale data .... 
+
+*/
+
+

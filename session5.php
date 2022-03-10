@@ -1,9 +1,109 @@
 
 <?php
+
+
+
+//    $file = fopen('students.txt','a') or die("unable to open file ");
+ 
+//    $text = "c# course \n";    // \t 
+//    fwrite($file,$text);
+
+//    fclose($file);
+
+
+
+// $file = fopen('students.txt','r') or die("unable to open file ");
+
+
+// //    echo  fread($file,filesize('students.txt'));
+  
+//    while(!feof($file)){ 
+//     // echo  fgets($file).'<br>';
+//     echo  fgetc($file).'<br>';  
+
+// }
+
+
+//    fclose($file);
+
+
+
+
+
+
+  function Clean($input){
+ 
+        return  stripslashes(strip_tags(trim($input)));
+    }
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+ $name     = Clean($_POST['name']);
+ $email    = Clean($_POST['email']);
+ $password = Clean($_POST['password']);
+
+
+ # Errors Array ... 
+ $errors = []; 
+ 
+ # Validate Name ..... 
+ if(empty($name)){
+     $errors['Name'] = "Required Field ";
+ }
+
+ # Validate Email ... 
+ if(empty($email)){
+     $errors['Email']  = "Required Field"; 
+ }elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+     $errors['Email']  = "Invalid Format"; 
+ }
+
+ # Validate Password .... 
+ if(empty($password)){
+     $errors['Password']  = "Required Field"; 
+ }elseif(strlen($password) < 6){
+     $errors['Password']  = "Length Must Be >= 6 Chars"; 
+ }
+
+# Check Errors ...... 
+if(count($errors) > 0 ){
+    foreach ($errors as $key => $value) {
+        # code...
+        echo '* '.$key.' : '.$value.'<br>';
+    }
+}else{
+     
+        //  code .... 
+
+
+   $file = fopen('students.txt','a') or die("unable to open file ");
+ 
+   $text =  $name.'||'.$email.'||'.$password. " \n";    // \t 
+
+
+   fwrite($file,$text);
+
+   fclose($file);
+
+
+}
+
+
+}
+ 
+ 
+ 
+ 
+ 
  include 'header.php';
 
+
+
+
 ?>
-<body>
+ <body>
 
     <div class="container">
         <h2>Register (SESSION 5)</h2>
@@ -29,4 +129,4 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
+    </div> 

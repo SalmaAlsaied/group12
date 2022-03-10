@@ -4,20 +4,10 @@ session_start();
 // $title = "<h1> test Message </h1>";
 
 //     //   &lt;  h1   &gt; test Message &lt;   /h1    &gt;
-
-
 //    echo    htmlspecialchars($title) ;//strip_tags($title);
-
-
-
-// $text = "<b>Message</b>";
-
-     
+// $text = "<b>Message</b>";     
 //  echo   strip_tags($text);
    
-
-
-
 
 
 
@@ -72,6 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
            echo '* '.$key.' : '.$value.'<br>';
        }
    }else{
+        
+      # SET SESSION ...... 
+      $_SESSION['User'] = ["name" => $name , "email" => $email , "password" => $password];
+  
        echo 'Name : '.$name.'<br>'.' Email : '.$email;
    }
 
@@ -79,8 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 
-//    $_SESSION['Student'] = ["Name" => "Root Account" , "age" => 20];
-//    $_SESSION['id'] = 2013; 
 
 
 
