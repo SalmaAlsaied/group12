@@ -103,4 +103,44 @@
 //      echo $jsonData;
 
 
+###########################################################################################
+
+
+
+//    $data =   file_get_contents('http://shopping.marwaradwan.org/api/Products/1/1/0/10/atoz');
+
+
+//     $output = json_decode($data,true);
+
+
+//     foreach ($output['data'] as $key => $value) {
+//         # code...
+
+//         echo $value['products_id'].' || '. $value['products_name'].'<br>';
+
+//     }
+
+
+################################################################################################# 
+
+
+/*
+# USER [name , email , password ]
+ 
+
+ 
+# USER TABLE ... 
+id   Name    Email    Password     
+ 1    x        x@x     123         
+ 2    y        y@y     456         
+ 3    z        z@z     789         
+
+
+*/
+
+
+
+
+
+
 ?>
