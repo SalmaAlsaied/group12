@@ -130,10 +130,16 @@
 
  
 # USER TABLE ... 
-id   Name    Email    Password     
- 1    x        x@x     123         
+id   Name    Email    Password        userName 
+ 1    x        x@x     123               
  2    y        y@y     456         
  3    z        z@z     789         
+
+ 6    q        q@a     test
+
+
+ # ADMIN Table 
+ id   Name    Email    Password  
 
 
 */
