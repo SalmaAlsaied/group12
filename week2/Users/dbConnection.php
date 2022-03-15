@@ -1,5 +1,7 @@
 <?php  
 
+session_start();
+
 $server = "localhost";
 $dbName = "group12";
 $dbUser = "root";

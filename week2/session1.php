@@ -142,7 +142,12 @@ id   Name    Email    Password        userName
  id   Name    Email    Password  
 
 
+# reset id to 1 
+alter table users AUTO_INCREMENT = 1;
+
 */
+
+
 
 
 

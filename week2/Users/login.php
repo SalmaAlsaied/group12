@@ -11,7 +11,6 @@ function Clean($input)
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $name     = Clean($_POST['name']);
     $password = Clean($_POST['password']);
     $email    = Clean($_POST['email']);
 
@@ -20,10 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $errors = [];
 
-    # validate name .... 
-    if (empty($name)) {
-        $errors['name'] = "Field Required";
-    }
 
 
     # validate email 
@@ -42,27 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 
-    # Validate Image ... 
-    if (empty($_FILES['image']['name'])) {
-        $errors['Image'] = "Field Required";
-    } else {
-
-        # Validate extension ..... 
-
-        $imgType    = $_FILES['image']['type'];
-        # Allowed Extensions 
-        $allowedExtensions = ['jpg', 'png','jpeg'];
-
-        $imgArray = explode('/', $imgType);
-
-        # Image Extension ...... 
-         $imageExtension =  strtolower(end($imgArray));
-
-
-        if (!in_array($imageExtension, $allowedExtensions)) {
-            $errors['Image'] = "Invalid Extension";
-        }
-    }
 
 
 
@@ -77,36 +51,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     } else {
 
+        // Login Logic ...... 
+
+        $password = md5($password);
+
+        $sql = "select * from users where email = '$email' and password = '$password' "; 
+        $result = mysqli_query($con,$sql); 
+
+        if(mysqli_num_rows($result) == 1){
+            // code .. 
+
+        # Fetch Usre Data ....     
+        $data = mysqli_fetch_assoc($result); 
+
+        # Create Session ..... 
+        $_SESSION['user'] = $data; 
+
+        header("Location: index.php");
+
+        }else{
+            echo 'Error In Login Try Again ';
+        } 
+
+  
 
 
-        # Upload Image ..... 
-        $FinalName = time() . rand() . '.' . $imageExtension;
-
-        $disPath = 'uploads/' . $FinalName;
-
-        $imgTemName = $_FILES['image']['tmp_name'];
-
-
-        if (move_uploaded_file($imgTemName, $disPath)) {
-
-            $password =   md5($password);
-
-            // code ...... 
-            $sql = "insert into users (name,email,password,image) values ('$name','$email','$password','$FinalName')";
-
-            $op =  mysqli_query($con, $sql);
-
-            if ($op) {
-                echo 'Raw Inserted';
-            } else {
-                echo 'Error Try Again ' . mysqli_error($con);
-            }
-
-
-            mysqli_close($con);
-        } else {
-            echo 'Error In Upload File Try Again';
-        }
     }
 }
 
@@ -119,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang="en">
 
 <head>
-    <title>Register</title>
+    <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -130,14 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 
     <div class="container">
-        <h2>Register</h2>
+        <h2>Login</h2>
 
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label for="exampleInputName">Name</label>
-                <input type="text" class="form-control" required id="exampleInputName" aria-describedby="" name="name" placeholder="Enter Name">
-            </div>
 
 
             <div class="form-group">
@@ -146,16 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <div class="form-group">
-                <label for="exampleInputPassword">New Password</label>
+                <label for="exampleInputPassword">Password</label>
                 <input type="password" class="form-control" required id="exampleInputPassword1" name="password" placeholder="Password">
             </div>
 
-            <div class="form-group">
-                <label for="exampleInputName">Image</label>
-                <input type="file" name="image">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
 

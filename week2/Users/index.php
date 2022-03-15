@@ -1,10 +1,14 @@
-<?php 
+<?php
 
-require 'dbConnection.php';
+ require 'dbConnection.php';
+ require 'checkLogin.php';
 
-$sql = "select id , name , email from users";
+// $myId = $_SESSION['user']['id'];
+$sql = "select * from users ";
 
-$data = mysqli_query($con,$sql); 
+$data = mysqli_query($con, $sql);
+
+
 
 
 ?>
@@ -49,12 +53,32 @@ $data = mysqli_query($con,$sql);
         <div class="page-header">
             <h1>Read Users </h1>
             <br>
+           <?php 
+               # Welcome Message to Login User .... 
+               
+               echo 'Welcome , '.$_SESSION['user']['name'];
+           
+           ?>
+            <br>
 
+            <?php
+
+            if (isset($_SESSION['Message'])) {
+
+                # Display Message .... 
+                echo '* ' . $_SESSION['Message'];
+
+                # Remove session 
+                unset($_SESSION['Message']);
+            }
+
+
+            ?>
 
 
         </div>
 
-        <a href="">+ Account</a>
+        <a href="Create.php">+ Account</a> || <a href="logOut.php">LogOut</a>
 
         <table class='table table-hover table-responsive table-bordered'>
             <!-- creating our table heading -->
@@ -62,36 +86,46 @@ $data = mysqli_query($con,$sql);
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-
+                <th>Profile Image</th>
                 <th>action</th>
             </tr>
 
 
 
-    <?php 
-    
-         while($raw = mysqli_fetch_assoc($data)){
+            <?php
 
-    ?>
+            while ($raw = mysqli_fetch_assoc($data)) {
 
-            <tr>
+            ?>
 
-            <td><?php echo $raw['id'];?></td>
-            <td><?php echo $raw['name'];?></td>
-            <td><?php echo $raw['email'];?></td>
-                <td>
-                    <a href='' class='btn btn-danger m-r-1em'>Delete</a>
-                    <a href='' class='btn btn-primary m-r-1em'>Edit</a>
-                </td>
+                <tr>
 
-            </tr>
-<?php } 
+                    <td><?php echo $raw['id']; ?></td>
+                    <td><?php echo $raw['name']; ?></td>
+                    <td><?php echo $raw['email']; ?></td>
+                    <td> <img src="./uploads/<?php echo $raw['image']; ?>"  width="80" height="80"  >  </td>
+                    <td>
+                        
+                   <?php 
+                    
+                    if($raw['id'] !== $_SESSION['user']['id']){
+                      
+                   ?>
+                    <a href='delete.php?id=<?php echo $raw['id']; ?>' class='btn btn-danger m-r-1em'>Delete</a>
+                   <?php }?>
+
+
+                        <a href='edit.php?id=<?php echo $raw['id']; ?>' class='btn btn-primary m-r-1em'>Edit</a>
+                    </td>
+
+                </tr>
+            <?php }
 
 
 
-mysqli_close($con);
+            mysqli_close($con);
 
-?>
+            ?>
 
             <!-- end table -->
         </table>
