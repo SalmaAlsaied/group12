@@ -145,11 +145,25 @@ id   Name    Email    Password        userName
 # reset id to 1 
 alter table users AUTO_INCREMENT = 1;
 
+
+
+
+
+# Task .... 
+Hospital management system that have 3 main types of users 1-admins 2-doctors 3-Patients.
+With the following data.
+Admins   (name, email, password ) ,   phone 
+Patients (name, email, password)  ,
+Doctors  (name, email, password   , specialize(text) , gender).....
+nurse (name,email,password)
+
+
+Doctors have appointments(day , from , to) and
+Patients can reserve these appointments.
+Note : doctor can accept or refuse reservations.
+Requirments : create a database structure.
+
 */
-
-
-
-
 
 
 

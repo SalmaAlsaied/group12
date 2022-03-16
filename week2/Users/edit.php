@@ -47,6 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
+  # Validate Image ... 
+  if (!empty($_FILES['image']['name'])) {
+
+    # Validate extension ..... 
+    $imgType    = $_FILES['image']['type'];
+    # Allowed Extensions 
+    $allowedExtensions = ['jpg', 'png','jpeg'];
+
+    $imgArray = explode('/', $imgType);
+
+    # Image Extension ...... 
+     $imageExtension =  strtolower(end($imgArray));
+
+
+    if (!in_array($imageExtension, $allowedExtensions)) {
+        $errors['Image'] = "Invalid Extension";
+    }
+}
+
+
+
     # Check ...... 
     if (count($errors) > 0) {
         // print errors .... 
@@ -58,9 +79,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     } else {
 
+       
+
+        if (!empty($_FILES['image']['name'])) {
+
+
+            $FinalName = time() . rand() . '.' . $imageExtension;
+
+            $disPath = 'uploads/' . $FinalName;
+    
+            $imgTemName = $_FILES['image']['tmp_name'];
+    
+    
+            if (move_uploaded_file($imgTemName, $disPath)) {
+
+                unlink('uploads/'.$data['image']);
+            }
+        }else{
+            $FinalName = $data['image'];
+        }
+
+
+
+       
+       
         // code ...... 
         
-        $sql = "update users set name = '$name' , email = '$email' where id = $id";
+        $sql = "update users set name = '$name' , email = '$email' , image = '$FinalName' where id = $id";
 
 
          $op =  mysqli_query($con,$sql);
@@ -105,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="container">
         <h2>Update Account</h2>
 
-        <form action="edit.php?id=<?php echo $data['id'];?>" method="post">
+        <form action="edit.php?id=<?php echo $data['id'];?>" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="exampleInputName">Name</label>
@@ -118,8 +163,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="email" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" value="<?php echo $data['email']?>">
             </div>
 
+            <div class="form-group">
+                <label for="exampleInputName">Image</label>
+                <input type="file" name="image" >
+            </div>
         
-
+            <img src="uploads/<?php echo $data['image'];?>" alt="" height="90" width="90">
+<br>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
